@@ -2,11 +2,13 @@ package garages;
 
 import java.io.PrintStream;
 import java.util.*;
+import java.util.LinkedList;
 
 public class Voiture {
 
 	private final String immatriculation;
 	private final List<Stationnement> myStationnements = new LinkedList<>();
+        
 
 	public Voiture(String i) {
 		if (null == i) {
@@ -29,8 +31,13 @@ public class Voiture {
 	 */
 	public void entreAuGarage(Garage g) throws Exception {
 		// Et si la voiture est déjà dans un garage ?
+                if(estDansUnGarage() == false){
 		Stationnement s = new Stationnement(this, g);
 		myStationnements.add(s);
+                }
+                else{
+                throw new IllegalArgumentException("La voiture est déja dans un garage");
+                }
 	}
 
 	/**
@@ -40,10 +47,22 @@ public class Voiture {
 	 * @throws java.lang.Exception si la voiture n'est pas dans un garage
 	 */
 	public void sortDuGarage() throws Exception {
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 		// TODO: Implémenter cette méthode
 		// Trouver le dernier stationnement de la voiture
 		// Terminer ce stationnement
+                if (estDansUnGarage() == false){
+                    throw new IllegalArgumentException("La voiture doit etre dans un garage");
+                }
+                else{
+                System.out.println("Le dernier Stationement de la voiture est dans le garage :"+myStationnements.getLast());
+                LinkedList<Stationnement> s;
+                s (LinkedList) myStationnements;
+                Stationnement dernierGarage;
+                dernierGarage.terminer();
+                s.addLast(dernierGarage);
+                }
+                
 	}
 
 	/**
@@ -51,7 +70,9 @@ public class Voiture {
 	 */
 	public Set<Garage> garagesVisites() {
 		// TODO: Implémenter cette méthode
+                // ?
 		throw new UnsupportedOperationException("Pas encore implémenté");
+                System.out.println(s);
 	}
 
 	/**
@@ -59,8 +80,12 @@ public class Voiture {
 	 */
 	public boolean estDansUnGarage() {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 		// Vrai si le dernier stationnement est en cours
+                if (myStationnements.isEmpty()== true){
+                    return false;
+                }
+                return true;
 	}
 
 	/**
